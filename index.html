@@ -44,14 +44,21 @@
   <script>
     setTimeout(() => {
       const ua = navigator.userAgent || navigator.vendor || window.opera;
+      const isLine = ua.toLowerCase().includes("line");
       const isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
 
-      if (isIOS) {
+      if (isLine) {
+        document.body.innerHTML = `
+          <p class="blocked">LINEアプリ内ブラウザではこのページを表示できません。</p>
+          <p class="info">Chromeなど標準のブラウザで開いてください。</p>
+        `;
+      } else if (isIOS) {
         document.body.innerHTML = `
           <p class="blocked">このサイトはiPhoneからのアクセスを制限しています。</p>
         `;
       } else {
-        window.location.href = "https://www.mediafire.com/folder/985svm5uxdr0x/仮想空間";
+        // MediaFire フォルダURLへリダイレクト
+        window.location.href = "https://www.mediafire.com/folder/985svm5uxdr0x/%E4%BB%AE%E6%83%B3%E7%A9%BA%E9%96%93";
       }
     }, 3000);
   </script>
