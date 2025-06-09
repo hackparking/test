@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>仮想空間リンクアクセス可能環境チェッカー</title>
+  <title>アクセス確認中...</title>
   <style>
     body {
       font-family: sans-serif;
@@ -35,10 +35,15 @@
     .info {
       font-size: 20px;
     }
+
+    .welcome {
+      color: green;
+      font-size: 24px;
+    }
   </style>
 </head>
 <body>
-  <p class="info">互換性を確認するためにこのサイトを使用します。</p>
+  <p class="info">デバイスを確認中です...</p>
   <div class="loader"></div>
 
   <script>
@@ -50,17 +55,23 @@
       if (isLine) {
         document.body.innerHTML = `
           <p class="blocked">LINEアプリ内ブラウザではこのページを表示できません。</p>
-          <p class="info">Chromeなど標準のブラウザで開いてください。</p>
+          <p class="info">SafariやChromeなど標準のブラウザで開いてください。</p>
         `;
       } else if (isIOS) {
         document.body.innerHTML = `
           <p class="blocked">このサイトはiPhoneからのアクセスを制限しています。</p>
         `;
       } else {
-        // MediaFire フォルダURLへリダイレクト
-        window.location.href = "https://www.mediafire.com/folder/985svm5uxdr0x/%E4%BB%AE%E6%83%B3%E7%A9%BA%E9%96%93";
+        document.body.innerHTML = `
+          <p class="welcome">✅ ようこそ！アクセスが許可されました。</p>
+          <p class="info">3秒後にページへ移動します...</p>
+        `;
+        // さらに3秒後にMediaFireへリダイレクト
+        setTimeout(() => {
+          window.location.href = "https://www.mediafire.com/folder/985svm5uxdr0x/%E4%BB%AE%E6%83%B3%E7%A9%BA%E9%96%93";
+        }, 3000);
       }
-    }, 3000);
+    }, 3000); // 最初のローディング時間
   </script>
 </body>
 </html>
